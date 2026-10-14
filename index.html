@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#070b18">
+  <meta name="description" content="GLITCH//RUN — a neon cyberpunk endless runner. Dodge obstacles, collect energy, and beat your high score.">
+  <title>GLITCH//RUN — The System Is Breaking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Glitch Run home">
+        <span class="brand-mark">G</span>
+        <span>GLITCH<span class="brand-slash">//</span>RUN</span>
+      </a>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+      </div>
+    </header>
+
+    <section class="intro">
+      <p class="eyebrow">/// DIGITAL SURVIVAL PROTOCOL</p>
+      <h1>RUN THE <span>GLITCH.</span></h1>
+      <p class="subtitle">The system is breaking. How long can you survive?</p>
+    </section>
+
+    <section class="game-shell" aria-label="GLITCH RUN arcade game">
+      <div class="hud">
+        <div class="hud-item">
+          <span class="hud-label">SCORE</span>
+          <strong id="score">000000</strong>
+        </div>
+        <div class="hud-item energy-hud">
+          <span class="hud-label">ENERGY</span>
+          <strong><span class="energy-icon">◆</span> <span id="energy">00</span></strong>
+        </div>
+        <div class="hud-item best-hud">
+          <span class="hud-label">PERSONAL BEST</span>
+          <strong id="best">000000</strong>
+        </div>
+      </div>
+
+      <div class="canvas-wrap" id="canvasWrap">
+        <canvas id="gameCanvas" aria-label="Game area. Tap or press Space to jump over obstacles."></canvas>
+
+        <div class="screen-overlay" id="overlay">
+          <div class="overlay-content">
+            <div class="glitch-symbol">✳</div>
+            <p class="overlay-kicker" id="overlayKicker">INITIALIZING RUNNER</p>
+            <h2 id="overlayTitle">ENTER THE<br><span>GLITCH.</span></h2>
+            <p id="overlayText">Jump over the hazards. Collect the energy. Don't get caught.</p>
+            <button class="primary-button" id="startButton">▶ START RUN</button>
+            <p class="control-hint">TAP / CLICK / SPACE TO JUMP</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <div class="live-status"><span class="status-dot"></span><span id="gameStatus">READY FOR DEPLOYMENT</span></div>
+        <div class="speed-label">SPEED <span id="speedValue">01.0x</span></div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="control-card">
+        <span class="control-icon">↑</span>
+        <div><strong>JUMP</strong><p>Space / ↑ / Tap</p></div>
+      </div>
+      <div class="control-card">
+        <span class="control-icon energy-control">◆</span>
+        <div><strong>COLLECT</strong><p>Grab energy crystals</p></div>
+      </div>
+      <div class="control-card">
+        <span class="control-icon danger-control">✕</span>
+        <div><strong>SURVIVE</strong><p>Avoid every obstacle</p></div>
+      </div>
+    </section>
+
+    <footer class="bottom-note">
+      <span>GLITCH//RUN <span class="copyright">©</span> 2026</span>
+      <span>BUILT FOR THE FEARLESS.</span>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
