@@ -1,0 +1,473 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #070b18;
+  --panel: #0c1225;
+  --cyan: #39f5ff;
+  --purple: #a855f7;
+  --text: #f0f5ff;
+  --muted: #7e8aa8;
+  --line: rgba(104, 142, 220, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text);
+  font-family: 'Rajdhani', sans-serif;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(44, 67, 145, 0.22), transparent 55%),
+    var(--bg);
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.app {
+  width: min(100% - 32px, 980px);
+  margin: 0 auto;
+  padding: 24px 0 18px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  text-decoration: none;
+  font: 800 17px 'Orbitron', sans-serif;
+  letter-spacing: 1.2px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 33px;
+  height: 33px;
+  color: #07101b;
+  background: var(--cyan);
+  clip-path: polygon(25% 0, 100% 0, 100% 75%, 75% 100%, 0 100%, 0 25%);
+  font-size: 20px;
+}
+
+.brand-slash {
+  color: var(--cyan);
+}
+
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 7px 12px;
+  color: #a6b4d0;
+  font: 600 10px 'Orbitron', sans-serif;
+  letter-spacing: 0.6px;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #55ffb0;
+  box-shadow: 0 0 10px #55ffb0;
+  animation: pulse 1.5s infinite;
+}
+
+.intro {
+  text-align: center;
+  padding: 38px 0 27px;
+}
+
+.eyebrow {
+  margin-bottom: 13px;
+  color: var(--cyan);
+  font: 600 10px 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+.intro h1 {
+  font: 900 clamp(29px, 6vw, 48px) 'Orbitron', sans-serif;
+  letter-spacing: -1.8px;
+  line-height: 1.15;
+}
+
+.intro h1 span,
+.overlay-content h2 span {
+  color: var(--cyan);
+  text-shadow: 0 0 25px rgba(57, 245, 255, 0.25);
+}
+
+.subtitle {
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.game-shell {
+  overflow: hidden;
+  border: 1px solid rgba(75, 117, 200, 0.34);
+  border-radius: 13px;
+  background: rgba(10, 16, 34, 0.94);
+  box-shadow: 0 0 50px rgba(24, 80, 180, 0.1), 0 18px 60px rgba(0, 0, 0, 0.2);
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 15px 19px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.hud-item:nth-child(2) {
+  align-items: center;
+}
+
+.hud-item:nth-child(3) {
+  align-items: flex-end;
+}
+
+.hud-label {
+  color: var(--muted);
+  font: 600 9px 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+
+.hud-item strong {
+  font: 700 clamp(15px, 3vw, 21px) 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.energy-icon {
+  color: #ffd166;
+  font-size: 16px;
+  text-shadow: 0 0 10px rgba(255, 209, 102, 0.7);
+}
+
+.canvas-wrap {
+  position: relative;
+  width: 100%;
+  background: #080e20;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 43vw, 390px);
+  touch-action: manipulation;
+  outline: none;
+}
+
+.screen-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: linear-gradient(90deg, rgba(6, 10, 24, 0.77), rgba(6, 10, 24, 0.43), rgba(6, 10, 24, 0.77));
+  text-align: center;
+  transition: opacity 0.25s ease;
+}
+
+.screen-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.overlay-content {
+  max-width: 390px;
+}
+
+.glitch-symbol {
+  margin-bottom: 5px;
+  color: var(--cyan);
+  font-size: 32px;
+  line-height: 1.2;
+  text-shadow: 0 0 20px rgba(57, 245, 255, 0.65);
+  animation: float 2s ease-in-out infinite;
+}
+
+.overlay-kicker {
+  margin-bottom: 10px;
+  color: var(--purple);
+  font: 700 9px 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+}
+
+.overlay-content h2 {
+  font: 900 clamp(28px, 6vw, 43px) 'Orbitron', sans-serif;
+  line-height: 1.22;
+  letter-spacing: -1px;
+}
+
+.overlay-content > p:not(.overlay-kicker):not(.control-hint) {
+  margin: 13px auto 20px;
+  color: #a7b4d0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.primary-button {
+  min-width: 175px;
+  border: 1px solid var(--cyan);
+  border-radius: 5px;
+  padding: 12px 22px;
+  color: #06101a;
+  background: var(--cyan);
+  box-shadow: 0 0 24px rgba(57, 245, 255, 0.19);
+  cursor: pointer;
+  font: 800 12px 'Orbitron', sans-serif;
+  letter-spacing: 0.8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(57, 245, 255, 0.42);
+}
+
+.primary-button:active {
+  transform: scale(0.97);
+}
+
+.control-hint {
+  margin-top: 14px;
+  color: #697894;
+  font: 600 9px 'Orbitron', sans-serif;
+  letter-spacing: 1px;
+}
+
+.game-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 18px;
+  border-top: 1px solid var(--line);
+  color: #8997b5;
+  font: 600 9px 'Orbitron', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.live-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.speed-label span {
+  color: var(--cyan);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.control-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  padding: 15px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(12, 18, 37, 0.75);
+}
+
+.control-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid rgba(57, 245, 255, 0.3);
+  border-radius: 7px;
+  color: var(--cyan);
+  background: rgba(57, 245, 255, 0.07);
+  font: 700 22px 'Orbitron', sans-serif;
+}
+
+.energy-control {
+  color: #ffd166;
+  border-color: rgba(255, 209, 102, 0.3);
+  background: rgba(255, 209, 102, 0.06);
+}
+
+.danger-control {
+  color: #ff628c;
+  border-color: rgba(255, 98, 140, 0.3);
+  background: rgba(255, 98, 140, 0.06);
+}
+
+.control-card strong {
+  display: block;
+  font: 700 10px 'Orbitron', sans-serif;
+  letter-spacing: 0.6px;
+}
+
+.control-card p {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.bottom-note {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 24px;
+  color: #576580;
+  font: 600 9px 'Orbitron', sans-serif;
+  letter-spacing: 0.6px;
+}
+
+.copyright {
+  color: var(--cyan);
+}
+
+@keyframes pulse {
+  50% { opacity: 0.45; }
+}
+
+@keyframes float {
+  50% { transform: translateY(-5px) rotate(8deg); }
+}
+
+@media (max-width: 600px) {
+  .app {
+    width: min(100% - 20px, 980px);
+    padding-top: 15px;
+  }
+
+  .topbar {
+    padding-bottom: 16px;
+  }
+
+  .brand {
+    gap: 7px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .brand-mark {
+    width: 29px;
+    height: 29px;
+  }
+
+  .status-pill {
+    padding: 6px 8px;
+    font-size: 8px;
+  }
+
+  .intro {
+    padding: 30px 0 21px;
+  }
+
+  .eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.3px;
+  }
+
+  .subtitle {
+    max-width: 300px;
+    margin: 10px auto 0;
+    font-size: 15px;
+  }
+
+  .hud {
+    padding: 12px 10px;
+    gap: 4px;
+  }
+
+  .hud-label {
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+
+  .hud-item strong {
+    font-size: 14px;
+  }
+
+  #gameCanvas {
+    height: 310px;
+  }
+
+  .screen-overlay {
+    padding: 12px;
+  }
+
+  .overlay-content h2 {
+    font-size: 30px;
+  }
+
+  .overlay-content > p:not(.overlay-kicker):not(.control-hint) {
+    max-width: 270px;
+    font-size: 14px;
+  }
+
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .control-card {
+    padding: 10px 12px;
+  }
+
+  .control-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .bottom-note {
+    font-size: 8px;
+    letter-spacing: 0.2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
